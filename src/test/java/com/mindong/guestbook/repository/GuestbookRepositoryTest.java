@@ -35,12 +35,13 @@ public class GuestbookRepositoryTest {
     }
     @Test
     public void updateTest(){
-        Optional<Guestbook> result = guestbookRepository.findById(300L);
+        Optional<Guestbook> result = guestbookRepository.findById(299L);
 
         if(result.isPresent()){
             Guestbook guestbook = result.get();
-            guestbook.changeTitle("안재호 병신새끼");
-            guestbook.changeContent("안재호가 병신인 이유는 병신이기 때문이다");
+            guestbook.changeTitle("이권민 폭로영상");
+            guestbook.changeWriter("최현수1");
+            guestbook.changeContent("이권민");
 
             guestbookRepository.save(guestbook);
         }
