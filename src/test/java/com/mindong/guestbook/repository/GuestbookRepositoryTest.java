@@ -23,7 +23,7 @@ public class GuestbookRepositoryTest {
 
     @Test
     public void insertDummies(){
-        IntStream.rangeClosed(1,300).forEach(i->{
+        IntStream.rangeClosed(1,10).forEach(i->{
 
             Guestbook guestbook = Guestbook.builder()
                     .title("Title..." + i)
@@ -35,7 +35,7 @@ public class GuestbookRepositoryTest {
     }
     @Test
     public void updateTest(){
-        Optional<Guestbook> result = guestbookRepository.findById(299L);
+        Optional<Guestbook> result = guestbookRepository.findById(1L);
 
         if(result.isPresent()){
             Guestbook guestbook = result.get();
