@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "writer")
 public class Guestbook extends BaseEntity {
 
     @Id
@@ -21,16 +21,13 @@ public class Guestbook extends BaseEntity {
     @Column(length = 1500, nullable = false)
     private String content;
 
-    @Column(length = 50, nullable = false)
-    private String writer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member writer;
 
     public void changeTitle(String title){
         this.title = title;
     }
     public void changeContent(String content){
         this.content = content;
-    }
-    public void changeWriter(String writer){
-        this.writer = writer;
     }
 }

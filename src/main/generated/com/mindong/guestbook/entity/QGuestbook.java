@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -16,6 +17,8 @@ import com.querydsl.core.types.Path;
 public class QGuestbook extends EntityPathBase<Guestbook> {
 
     private static final long serialVersionUID = 1906085256L;
+
+    private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QGuestbook guestbook = new QGuestbook("guestbook");
 
@@ -33,18 +36,27 @@ public class QGuestbook extends EntityPathBase<Guestbook> {
 
     public final StringPath title = createString("title");
 
-    public final StringPath writer = createString("writer");
+    public final QMember writer;
 
     public QGuestbook(String variable) {
-        super(Guestbook.class, forVariable(variable));
+        this(Guestbook.class, forVariable(variable), INITS);
     }
 
     public QGuestbook(Path<? extends Guestbook> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QGuestbook(PathMetadata metadata) {
-        super(Guestbook.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QGuestbook(PathMetadata metadata, PathInits inits) {
+        this(Guestbook.class, metadata, inits);
+    }
+
+    public QGuestbook(Class<? extends Guestbook> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.writer = inits.isInitialized("writer") ? new QMember(forProperty("writer")) : null;
     }
 
 }
