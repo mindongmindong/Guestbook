@@ -1,9 +1,6 @@
 package com.mindong.guestbook.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -11,10 +8,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
 public class GuestbookDTO {
     private Long gno;
     private String title;
     private String content;
-    private String writer;
+    private String writerEmail;
+    private String writerName;
     private LocalDateTime regDate, modDate;
+    private int replyCount;
 }

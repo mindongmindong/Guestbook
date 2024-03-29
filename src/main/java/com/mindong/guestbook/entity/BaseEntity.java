@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@MappedSuperclass
+@MappedSuperclass // 테이블로 생성되지 않게함
 @EntityListeners(value= {AuditingEntityListener.class})
 @Getter
 abstract class BaseEntity {

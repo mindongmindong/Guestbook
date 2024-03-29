@@ -9,14 +9,18 @@ import com.mindong.guestbook.entity.Member;
 public interface GuestbookService {
     Long register(GuestbookDTO dto);
 
-    GuestbookDTO read(Long gno);
-    void remove(Long gno);
     void modify(GuestbookDTO dto);
 
-    PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO);
+    PageResultDTO<GuestbookDTO, Object[]> getList(PageRequestDTO requestDTO);
+
+    GuestbookDTO get(Long gno);
+
+    void removeWithReplies(Long gno);
 
     default Guestbook dtoToEntity(GuestbookDTO dto){
-        Member member = Member.builder().email(dto.getWriter()).build();
+        Member member = Member.builder()
+                .email(dto.getWriterEmail())
+                .build();
 
         Guestbook entity = Guestbook.builder()
                 .gno(dto.getGno())
@@ -26,16 +30,18 @@ public interface GuestbookService {
                 .build();
         return entity;
     }
-    default GuestbookDTO entityToDto(Guestbook entity){
-        Member member = entity.getWriter();
+    default GuestbookDTO entityToDto(Guestbook guestbook,Member member, Long count){
         GuestbookDTO dto = GuestbookDTO.builder()
-                .gno(entity.getGno())
-                .title(entity.getTitle())
-                .content(entity.getContent())
-                .writer(member.getEmail())
-                .regDate(entity.getRegDate())
-                .modDate(entity.getModDate())
+                .gno(guestbook.getGno())
+                .title(guestbook.getTitle())
+                .content(guestbook.getContent())
+                .regDate(guestbook.getRegDate())
+                .modDate(guestbook.getModDate())
+                .replyCount(count.intValue())
+                .writerEmail(member.getEmail())
+                .writerName(member.getName())
                 .build();
         return dto;
     }
+
 }
